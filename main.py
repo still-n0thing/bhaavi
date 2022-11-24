@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost' # Which host are we using (need to changed for the deployment)
 app.config['MYSQL_USER'] = 'root' # Level of access
 app.config['MYSQL_PASSWORD'] = '' # Password of the database
-app.config['MYSQL_DB'] = 'flask'  # This is the name of database
+app.config['MYSQL_DB'] = 'bhaavi-db'  # This is the name of database
 
 mysql = MySQL(app)
 
@@ -26,7 +26,7 @@ def login():
         age = request.form['age']
         cursor = mysql.connection.cursor()
         cursor.execute(
-            ''' INSERT INTO info_table VALUES(%s,%s)''', (name, age))
+            ''' INSERT INTO info_table VALUES(NULL, %s, %s)''', (name, age, ))
         mysql.connection.commit()
         cursor.close()
         return f"Done!!"
